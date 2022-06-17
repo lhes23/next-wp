@@ -1,13 +1,11 @@
 import Link from "next/link";
 
-const baseUrl = "http://localhost/headless-wp/graphql";
-
 const Post = ({ post }) => {
   const { title, content } = post;
   return (
     <div>
       <h1>{title}</h1>
-      <p dangerouslySetInnerHTML={{ __html: content }}></p>
+      <div dangerouslySetInnerHTML={{ __html: content }}></div>
       <Link href="/">Home</Link>
     </div>
   );
@@ -16,7 +14,7 @@ const Post = ({ post }) => {
 export default Post;
 
 export async function getStaticProps(ctx) {
-  const res = await fetch(baseUrl, {
+  const res = await fetch(process.env.NEXT_PUBLIC_WP_GRAPHQL_API_DEV, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -51,7 +49,7 @@ export async function getStaticProps(ctx) {
 }
 
 export async function getStaticPaths() {
-  const res = await fetch(baseUrl, {
+  const res = await fetch(process.env.NEXT_PUBLIC_WP_GRAPHQL_API_DEV, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

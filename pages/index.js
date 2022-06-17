@@ -20,7 +20,7 @@ export default function Home({ posts }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch("http://localhost/headless-wp/graphql", {
+  const res = await fetch(process.env.NEXT_PUBLIC_WP_GRAPHQL_API_DEV, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
